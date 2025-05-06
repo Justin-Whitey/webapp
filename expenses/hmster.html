@@ -64,7 +64,7 @@
 </head>
 
 <body>
-    <h1>Expenses (List)</h1>
+    <h1>Expenses (Hamster)</h1>
     
     <table id="expenseTable">
         <tr>
@@ -110,7 +110,7 @@
     </table>
 
     <div class="button-container">
-        <a href="../front/hamster.html" class="btn-link">Back</a>
+        <a href="../front/rabbit.html" class="btn-link">Back</a>
         <button onclick="addColumn()">Add Column</button>
         <button onclick="deleteColumn()">Delete Column</button>
     </div>
@@ -123,12 +123,12 @@
             const table = document.getElementById("expenseTable");
             const rows = table.rows;
 
-            // Add header
+            
             const headerCell = document.createElement("th");
             headerCell.textContent = `BATCH ${batchCount}`;
             rows[0].appendChild(headerCell);
 
-            // Add inputs to each row except last
+            
             for (let i = 1; i < rows.length - 1; i++) {
                 const cell = document.createElement("td");
                 const input = document.createElement("input");
@@ -139,7 +139,7 @@
                 rows[i].appendChild(cell);
             }
 
-            // Add total input
+            
             const totalCell = document.createElement("td");
             const totalInput = document.createElement("input");
             totalInput.type = "number";
@@ -180,4 +180,5 @@
     </script>
 </body>
 </html>
+
 

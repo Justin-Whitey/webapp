@@ -1,0 +1,137 @@
+<html>
+<head>
+  
+  <title>Batch Quantity Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #9B1B30;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .button {
+      padding: 10px 20px;
+      margin: 10px 5px 0 0;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .logout {
+      float: right;
+      margin-right: 20px;
+      color: black;
+    }
+    .logout:hover {
+      text-decoration: none;
+    }
+    .button-container {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PME’X</h1>
+  <h2>Batch Quantity Report</h2>
+  <a href="../regis/logout.html" class="logout">LOG OUT</a>
+  <a href="../front/front_page.html" class="logout">HOME</a>
+</header>
+
+<table id="batchTable">
+  <thead>
+    <tr>
+      <th>DATE</th>
+      <th>ORDER</th>
+      <th>ORDER QTY</th>
+      <th>DATE BATCH STARTED</th>
+      <th>BATCH START TIME</th>
+      <th>BATCH ASSIGNED</th>
+      <th>POPULATION IN BATCH</th>
+      <th>STATUS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="date" /></td>
+      <td><input type="number" /></td>
+      <td><input type="number" /></td>
+      <td><input type="date" /></td>
+      <td><input type="time" /></td>
+      <td><input type="number" /></td>
+      <td><input type="number" /></td>
+      <td><input type="text" placeholder="STATUS" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="button-container">
+  <button class="button">SAVE</button>
+  <button class="button">VIEW REPORT</button>
+  <button class="button" onclick="addRow()">ADD NEW ROW</button>
+  <button class="button" onclick="deleteRow()">DELETE LAST ROW</button>
+</div>
+
+<script>
+  function addRow() {
+    const table = document.getElementById("batchTable").getElementsByTagName("tbody")[0];
+    const newRow = document.createElement("tr");
+
+    const inputs = [
+      { type: "date" },
+      { type: "number" },
+      { type: "number" },
+      { type: "date" },
+      { type: "time" },
+      { type: "number" },
+      { type: "number" },
+      { type: "text", placeholder: "STATUS" }
+    ];
+
+    inputs.forEach(attr => {
+      const td = document.createElement("td");
+      const input = document.createElement("input");
+      input.type = attr.type;
+      if (attr.placeholder) input.placeholder = attr.placeholder;
+      td.appendChild(input);
+      newRow.appendChild(td);
+    });
+
+    table.appendChild(newRow);
+  }
+
+  function deleteRow() {
+    const table = document.getElementById("batchTable").getElementsByTagName("tbody")[0];
+    if (table.rows.length > 1) {
+      table.deleteRow(-1);
+    }
+  }
+</script>
+
+</body>
+</html>
+
+
+
