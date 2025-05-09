@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$db = 'user_system';
+$db = 'user_login';
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -18,9 +18,11 @@ $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
 if ($row = $result->fetch_assoc()) {
-    if (password_verify($password, $row['password'])) {
-        header("Location: front/front_page.php");
+
+    if ($password === $row["password"]) {
+        header("Location: front_page.html");
         exit;
     } else {
         echo "Invalid password";
@@ -34,3 +36,4 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 $conn->close();
 ?>
+

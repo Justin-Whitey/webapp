@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
