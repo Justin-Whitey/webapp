@@ -1,8 +1,6 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+	<title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,7 +18,7 @@
             align-items: center;
         }
         .right {
-            background-color: #8B0A0A; /* Dark Red */
+            background-color: #8B0A0A;
             color: white;
             flex: 1;
             display: flex;
@@ -44,12 +42,14 @@
             display: inline-block;
             text-align: center;
             padding: 10px;
-            background-color: #A80000; /* Matching button color */
+            background-color: #A80000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             margin-top: 10px;
+            border: none;
+            cursor: pointer;
         }
         .signup-link {
             margin-top: 10px;
@@ -65,10 +65,10 @@
     </div>
     <div class="right">
         <h2>LOGIN</h2>
-        <form>
-            <input type="email" placeholder="E-mail" required>
-            <input type="password" placeholder="Password" required>
-            <a href="../front/front_page.html" class="login-button">Log In</a>
+        <form action="login.php" method="POST">
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="login-button">Log In</button>
         </form>
         <a href="../regis/signup.html" class="signup-link">Don't have an account? Sign Up</a>
     </div>
