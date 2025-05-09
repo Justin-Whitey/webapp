@@ -65,7 +65,7 @@
     </div>
     <div class="right">
         <h2>LOGIN</h2>
-        <form action="log_in.php" method="POST">
+        <form action="login.php" method="POST">
             <input type="email" name="email" placeholder="E-mail" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="login-button">Log In</button>
