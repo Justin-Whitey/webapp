@@ -97,7 +97,7 @@ $total_foods = 0;
         </tfoot>
     </table>
 
-    <a href="hmsterexp.php" class="btn-link">Back to Form</a>
+    <a href="hmsterexp.html" class="btn-link">Back to Form</a>
 </body>
 </html>
 
