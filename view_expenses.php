@@ -17,9 +17,7 @@ $total_foods = 0;
 <head>
     <title>Hamster Expenses Report</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+        body { font-family: Arial, sans-serif; }
         h1 {
             text-align: center;
             background-color: #800000;
@@ -27,7 +25,7 @@ $total_foods = 0;
             padding: 10px;
         }
         table {
-            width: 90%;
+            width: 95%;
             margin: 20px auto;
             border-collapse: collapse;
         }
@@ -43,17 +41,16 @@ $total_foods = 0;
             font-weight: bold;
             background-color: #d9d9d9;
         }
-        .btn-link {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-            padding: 10px 20px;
+        .btn-link, .btn-action {
+            padding: 5px 10px;
             background-color: #800000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            margin: 0 2px;
+            display: inline-block;
         }
-        .btn-link:hover {
+        .btn-link:hover, .btn-action:hover {
             background-color: #a00000;
         }
     </style>
@@ -67,6 +64,7 @@ $total_foods = 0;
             <th>Equipment Cost</th>
             <th>Vaccine</th>
             <th>Foods</th>
+            <th>Actions</th>
         </tr>
 
         <?php while($row = $result->fetch_assoc()): ?>
@@ -76,6 +74,10 @@ $total_foods = 0;
             <td>₱<?php echo number_format($row['equipment_cost'], 2); ?></td>
             <td>₱<?php echo number_format($row['vaccine'], 2); ?></td>
             <td>₱<?php echo number_format($row['foods'], 2); ?></td>
+            <td>
+                <a class="btn-action" href="edit_exp.php?id=<?php echo $row['id']; ?>">Edit</a>
+                <a class="btn-action" href="delete_exp.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+            </td>
         </tr>
         <?php
             $total_equipment += $row['equipment_cost'];
@@ -90,11 +92,12 @@ $total_foods = 0;
                 <td>₱<?php echo number_format($total_equipment, 2); ?></td>
                 <td>₱<?php echo number_format($total_vaccine, 2); ?></td>
                 <td>₱<?php echo number_format($total_foods, 2); ?></td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
 
-    <a href="hamsterform.html" class="btn-link">Back to Form</a>
+    <a href="hmsterexp.php" class="btn-link">Back to Form</a>
 </body>
 </html>
 
