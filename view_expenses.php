@@ -53,6 +53,10 @@ $total_foods = 0;
         .btn-link:hover, .btn-action:hover {
             background-color: #a00000;
         }
+        .button-group {
+            text-align: center;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -97,7 +101,10 @@ $total_foods = 0;
         </tfoot>
     </table>
 
-    <a href="hmsterexp.html" class="btn-link">Back to Form</a>
+    <div class="button-group">
+        <a href="hmsterexp.html" class="btn-link">Back to Form</a>
+        <a href="hamsterfrnt.html" class="btn-link">Back to Page</a>
+    </div>
 </body>
 </html>
 

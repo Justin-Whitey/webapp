@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 <html>
 <head>
-  
   <title>Batch Quantity Report</title>
   <style>
     body {
@@ -13,6 +13,21 @@
       color: white;
       padding: 20px;
       text-align: center;
+      position: relative;
+    }
+    .nav-links {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .nav-links a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav-links a:hover {
+      text-decoration: underline;
     }
     table {
       width: 100%;
@@ -38,16 +53,19 @@
     .button:hover {
       background-color: #45a049;
     }
-    .logout {
-      float: right;
-      margin-right: 20px;
-      color: black;
-    }
-    .logout:hover {
-      text-decoration: none;
-    }
     .button-container {
       margin: 20px;
+    }
+    .back-button {
+      padding: 10px 20px;
+      margin-left: 5px;
+      background-color: #555;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .back-button:hover {
+      background-color: #333;
     }
   </style>
 </head>
@@ -56,8 +74,10 @@
 <header>
   <h1>PME’X</h1>
   <h2>Batch Quantity Report</h2>
-  <a href="../regis/logout.html" class="logout">LOG OUT</a>
-  <a href="../front/front_page.html" class="logout">HOME</a>
+  <div class="nav-links">
+    <a href="front_page.html">HOME</a>
+    <a href="logout.html">LOG OUT</a>
+  </div>
 </header>
 
 <table id="batchTable">
@@ -90,48 +110,8 @@
 <div class="button-container">
   <button class="button">SAVE</button>
   <button class="button">VIEW REPORT</button>
-  <button class="button" onclick="addRow()">ADD NEW ROW</button>
-  <button class="button" onclick="deleteRow()">DELETE LAST ROW</button>
+  <a href="hamsterfrnt.html" class="back-button">BACK</a>
 </div>
-
-<script>
-  function addRow() {
-    const table = document.getElementById("batchTable").getElementsByTagName("tbody")[0];
-    const newRow = document.createElement("tr");
-
-    const inputs = [
-      { type: "date" },
-      { type: "number" },
-      { type: "number" },
-      { type: "date" },
-      { type: "time" },
-      { type: "number" },
-      { type: "number" },
-      { type: "text", placeholder: "STATUS" }
-    ];
-
-    inputs.forEach(attr => {
-      const td = document.createElement("td");
-      const input = document.createElement("input");
-      input.type = attr.type;
-      if (attr.placeholder) input.placeholder = attr.placeholder;
-      td.appendChild(input);
-      newRow.appendChild(td);
-    });
-
-    table.appendChild(newRow);
-  }
-
-  function deleteRow() {
-    const table = document.getElementById("batchTable").getElementsByTagName("tbody")[0];
-    if (table.rows.length > 1) {
-      table.deleteRow(-1);
-    }
-  }
-</script>
 
 </body>
 </html>
-
-
-

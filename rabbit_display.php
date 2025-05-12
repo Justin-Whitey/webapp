@@ -47,7 +47,7 @@ $total_foods = 0;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            margin: 0 2px;
+            margin: 0 5px;
             display: inline-block;
             text-align: center;
         }
@@ -56,6 +56,10 @@ $total_foods = 0;
         }
         .btn-action {
             cursor: pointer;
+        }
+        .button-group {
+            text-align: center;
+            margin: 20px;
         }
     </style>
 </head>
@@ -75,7 +79,7 @@ $total_foods = 0;
         <tr>
             <td><?php echo htmlspecialchars($row['batch']); ?></td>
             <td><?php echo htmlspecialchars($row['type']); ?></td>
-            <td>₱<?php echo number_format($row['equipment'], 2); ?></td> <!-- Assuming column name is 'equipment' -->
+            <td>₱<?php echo number_format($row['equipment'], 2); ?></td>
             <td>₱<?php echo number_format($row['vaccine'], 2); ?></td>
             <td>₱<?php echo number_format($row['foods'], 2); ?></td>
             <td>
@@ -101,7 +105,10 @@ $total_foods = 0;
         </tfoot>
     </table>
 
-    <a href="rabbitexp.html" class="btn-link">Back to Form</a>
+    <div class="button-group">
+        <a href="rabbitexp.html" class="btn-link">Back to Form</a>
+        <a href="rabbitfrnt.html" class="btn-link">Back to Page</a>
+    </div>
 </body>
 </html>
 
