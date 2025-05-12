@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
@@ -57,6 +56,15 @@
             color: white;
             text-decoration: none;
         }
+        .show-password {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: white;
+        }
+        .show-password input {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -66,12 +74,22 @@
     </div>
     <div class="right">
         <h2>LOGIN</h2>
-        <form action="login.php" method="POST">
+        <form action="user.php" method="POST">
             <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <label class="show-password">
+                <input type="checkbox" onclick="togglePassword()"> Show Password
+            </label>
             <button type="submit" class="login-button">Log In</button>
         </form>
-        <a href="../regis/signup.html" class="signup-link">Don't have an account? Sign Up</a>
+        <a href="signup.html" class="signup-link">Don't have an account? Sign Up</a>
     </div>
+
+    <script>
+        function togglePassword() {
+            var x = document.getElementById("password");
+            x.type = x.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>

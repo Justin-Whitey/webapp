@@ -1,14 +1,12 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logout Confirmation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #9B2D2E; /* Red background */
+            background-color: #9B2D2E;
             color: white;
         }
         .header {
@@ -19,7 +17,12 @@
         .container {
             text-align: center;
             padding: 40px;
-            background-color: #9B2D2E; /* Red background */
+            background-color: #9B2D2E;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
         }
         .button {
             padding: 10px 20px;
@@ -36,19 +39,27 @@
         .go-back-button {
             background-color: black;
             color: white;
+            text-decoration: none;
+        }
+        .go-back-button:hover {
+            background-color: #555; 
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>PME’X</h1>
+        <h1>PMEX</h1>
     </div>
 
     <div class="container">
         <h2>Are you sure you want to Log out?</h2>
-        <button class="button yes-button">Yes</button>
-        <a href="front_page.html" class="button go-back-button">Go Back</a>
+        <div class="button-container">
+            <form action="logout.php" method="POST">
+                <button type="submit" class="button yes-button">Yes</button>
+            </form>
+            <a href="front_page.html" class="button go-back-button">Go Back</a>
+        </div>
     </div>
 
 </body>

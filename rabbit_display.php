@@ -106,7 +106,6 @@ $total_foods = 0;
     </table>
 
     <div class="button-group">
-        <a href="rabbitexp.html" class="btn-link">Back to Form</a>
         <a href="rabbitfrnt.html" class="btn-link">Back to Page</a>
     </div>
 </body>
