@@ -86,16 +86,35 @@ $result = $conn->query("SELECT * FROM batches");
         .back-button:hover {
             background-color: #a93226;
         }
+        .add-new-button {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 6px 16px;
+            font-size: 14px;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .add-new-button:hover {
+            background-color: #a93226;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>All Batch Entries</h1>
+        <!-- Add New Button placed under the heading -->
+        <a href="batch_form.php" class="add-new-button">Add New</a>
+        
         <table>
             <tr>
                 <th>Batch Number</th>
                 <th>Breed</th>
                 <th>Quantity</th>
+                <th>Date Created</th>
                 <th>Actions</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
@@ -103,12 +122,13 @@ $result = $conn->query("SELECT * FROM batches");
                     <td><?= $row['batch_number'] ?></td>
                     <td><?= $row['breed'] ?></td>
                     <td><?= $row['quantity'] ?></td>
+                    <td><?= date('F j, Y', strtotime($row['date_created'])) ?></td>
                     <td>
                         <div class="action-group">
                             <a href="view_expenses.php?batch_id=<?= $row['id'] ?>" class="button">View Expenses</a>
                             <a href="add_expenses.php?batch_id=<?= $row['id'] ?>" class="button">Add Expenses</a>
                             <a href="batch_list.php?delete_id=<?= $row['id'] ?>" class="button" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
-                            <a href="batch_form.php" class="button">Add New</a>
+                            <a href="batch_edit.php?batch_id=<?= $row['id'] ?>" class="button">Edit</a>
                         </div>
                     </td>
                 </tr>

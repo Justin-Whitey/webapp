@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM batches";
+$sql = "SELECT * FROM batches ORDER BY date_created DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -20,7 +20,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rabbit Batch List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,6 +51,13 @@ $result = $conn->query($sql);
             padding: 12px;
             border-bottom: 1px solid #ccc;
             text-align: center;
+            font-weight: bold;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
         }
         .button {
             padding: 8px 12px;
@@ -59,18 +66,17 @@ $result = $conn->query($sql);
             border: none;
             border-radius: 4px;
             text-decoration: none;
-            cursor: pointer;
+            font-size: 14px;
+            min-width: 100px;
+            text-align: center;
         }
         .button:hover {
             background-color: #c0392b;
-            color: grey;
+            color: white;
         }
         .button-container {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
-        }
-        .action-buttons a {
-            margin: 0 5px;
         }
     </style>
 </head>
@@ -78,12 +84,18 @@ $result = $conn->query($sql);
 
 <div class="container">
     <h1>Rabbit Batch List</h1>
+    
+    <div class="button-container mb-3">
+        <a href="rabbit_batch_form.php" class="button">Add New Batch</a>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
                 <th>Batch Number</th>
                 <th>Breed</th>
                 <th>Quantity</th>
+                <th>Date Created</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -93,11 +105,14 @@ $result = $conn->query($sql);
                     <td><?= $row['batch_number'] ?></td>
                     <td><?= $row['breed'] ?></td>
                     <td><?= $row['quantity'] ?></td>
-                    <td class="action-buttons">
-                        <a href="rabbit_display.php?batch_id=<?= $row['id'] ?>" class="button">View Expenses</a>
-                        <a href="rabbitexp.php?batch_id=<?= $row['id'] ?>" class="button">Add Expenses</a>
-                        <a href="rabbit_batch_delete.php?batch_id=<?= $row['id'] ?>" class="button" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
-                        <a href="rabbit_batch_form.php" class="button">Add New</a>
+                    <td><?= date('F j, Y', strtotime($row['date_created'])) ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="rabbit_display.php?batch_id=<?= $row['id'] ?>" class="button">View</a>
+                            <a href="rabbitexp.php?batch_id=<?= $row['id'] ?>" class="button">Add Expense</a>
+                            <a href="rabbit_batch_edit.php?batch_id=<?= $row['id'] ?>" class="button">Edit</a>
+                            <a href="rabbit_batch_delete.php?batch_id=<?= $row['id'] ?>" class="button" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+                        </div>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -112,6 +127,4 @@ $result = $conn->query($sql);
 </body>
 </html>
 
-<?php
-$conn->close();
-?>
+<?php $conn->close(); ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 05:29 PM
+-- Generation Time: May 13, 2025 at 03:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,48 +18,50 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `user_login`
+-- Database: `report_rabbit`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `rabbit_expenses`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `rabbit_expenses` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `batch` varchar(50) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `equipment` decimal(10,2) NOT NULL,
+  `vaccine` decimal(10,2) NOT NULL,
+  `foods` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `rabbit_expenses`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(3, 'user@gmail.com', '$2y$10$9PeQgQYRZWDYmkjmsD0Uh.PPh/SQuh9PVXpJqZyKbDO4GbpRQqqn.');
+INSERT INTO `rabbit_expenses` (`id`, `batch`, `type`, `equipment`, `vaccine`, `foods`) VALUES
+(5, '1', '2', 3.00, 4.00, 5.00);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `rabbit_expenses`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+ALTER TABLE `rabbit_expenses`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `rabbit_expenses`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `rabbit_expenses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 07:40 PM
+-- Generation Time: May 13, 2025 at 03:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -37,6 +37,13 @@ CREATE TABLE `hamster_expenses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `hamster_expenses`
+--
+
+INSERT INTO `hamster_expenses` (`id`, `batch`, `type`, `equipment_cost`, `vaccine`, `foods`) VALUES
+(9, '2', 'lok4', 2367.00, 900.00, 700.00);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -54,7 +61,7 @@ ALTER TABLE `hamster_expenses`
 -- AUTO_INCREMENT for table `hamster_expenses`
 --
 ALTER TABLE `hamster_expenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

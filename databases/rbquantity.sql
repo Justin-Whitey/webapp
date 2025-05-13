@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2025 at 07:41 PM
+-- Generation Time: May 13, 2025 at 04:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,8 +31,17 @@ CREATE TABLE `batches` (
   `id` int(11) NOT NULL,
   `batch_number` int(11) NOT NULL,
   `breed` varchar(255) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `date_created` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `batches`
+--
+
+INSERT INTO `batches` (`id`, `batch_number`, `breed`, `quantity`, `date_created`) VALUES
+(8, 1, 'kol', 12, '2025-05-13 22:03:37'),
+(9, 1, '2', 3434, '2025-05-13 22:08:51');
 
 --
 -- Indexes for dumped tables
@@ -52,7 +61,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `batches`
 --
 ALTER TABLE `batches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

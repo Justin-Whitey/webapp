@@ -1,97 +1,85 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Expenses</title>
+    <meta charset="UTF-8">
+    <title>Expenses (Rabbit)</title>
     <style>
         body {
-            font-family: Arial;
-            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            background-color: #B22222;
+            color: white;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: black;
         }
         h1 {
+            color: #c0392b;
             text-align: center;
-            background-color: #800000;
-            color: white;
+        }
+        label {
+            font-weight: bold;
+            color: #2c2c2c;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
             padding: 10px;
-            margin: 0;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 30px;
-        }
-        table {
-            width: 80%;
-            max-width: 900px;
-            border-collapse: collapse;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .category {
-            background-color: #d9d9d9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .category input[type="number"] {
-            width: 60px;
-            margin-left: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         .button-container {
-            width: 80%;
-            max-width: 900px;
-            text-align: right;
-            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
         }
         button, .btn-link {
             padding: 10px 20px;
-            background-color: #800000;
+            background-color: #c0392b;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             cursor: pointer;
             font-size: 16px;
         }
         button:hover, .btn-link:hover {
-            background-color: #a00000;
+            background-color: #a93226;
         }
     </style>
 </head>
 <body>
-    <h1>Expenses (Rabbit)</h1>
-    <form action="save_rabbit.php" method="POST">
-        <table>
-            <tr>
-                <th class="category">Batch</th>
-                <th>TYPE</th>
-                <th>EQUIPMENT COST</th>
-                <th>VACCINE</th>
-                <th>FOODS</th>
-            </tr>
-            <tr>
-                <td class="category">BATCH <input type="number" name="batch[]" min="1"></td>
-                <td><input type="text" name="type[]"></td>
-                <td><input type="number" name="equipment[]" step="0.01"></td>
-                <td><input type="number" name="vaccine[]" step="0.01"></td>
-                <td><input type="number" name="foods[]" step="0.01"></td>
-            </tr>
-        </table>
-        <div class="button-container">
-            <a href="rabbitfrnt.html" class="btn-link">Back</a>
-            <button type="submit">Save</button>
-        </div>
-    </form>
+    <div class="container">
+        <h1>Expenses (Rabbit)</h1>
+        <form action="save_rabbit.php" method="POST">
+            <label for="batch">Batch</label>
+            <input type="number" id="batch" name="batch[]" min="1" required>
+
+            <label for="type">Breed</label>
+            <input type="text" id="type" name="type[]" required>
+
+            <label for="equipment">Equipment Cost</label>
+            <input type="number" id="equipment" name="equipment[]" step="0.01" required>
+
+            <label for="vaccine">Vaccine Cost</label>
+            <input type="number" id="vaccine" name="vaccine[]" step="0.01" required>
+
+            <label for="foods">Food Cost</label>
+            <input type="number" id="foods" name="foods[]" step="0.01" required>
+
+            <div class="button-container">
+                <a href="rabbitfrnt.html" class="btn-link">Back</a>
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
