@@ -5,8 +5,6 @@
 <html lang="en">
 <head>
     <title>About Us</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <!-- Link to the external CSS file for this page -->
     <link rel="stylesheet" type="text/css" href="about.css">
 </head>
 <body>
@@ -27,7 +25,8 @@
     </div>
     
     <div class="para-text">
-        <p>Insert some additional description or information here.</p>
+        <p>At PME’X, we specialize in efficient and reliable inventory management tailored specifically for small mammals—rabbits and hamsters. Our system ensures precise tracking of breed types, quantities, and related resources, helping breeders and pet care facilities streamline their operations with accuracy and ease. Backed by data and built for simplicity, PME’X is your trusted partner in managing what matters most.</p>
+
     </div>
 </body>
 </html>
