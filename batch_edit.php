@@ -9,113 +9,109 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-if (isset($_GET['batch_id'])) {
-    $batch_id = $_GET['batch_id'];
-    $result = $conn->query("SELECT * FROM batches WHERE id = $batch_id");
-    $batch = $result->fetch_assoc();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $batch_id = $_POST['batch_id'];
-    $batch_number = $_POST['batch_number'];  
-    $breed = $_POST['breed'];
-    $quantity = $_POST['quantity'];
-
-    
-    $stmt = $conn->prepare("UPDATE batches SET batch_number = ?, breed = ?, quantity = ?, date_created = NOW() WHERE id = ?");
-    $stmt->bind_param("ssii", $batch_number, $breed, $quantity, $batch_id);
-    $stmt->execute();
-    $stmt->close();
-
-    
+if (!isset($_GET['batch_id'])) {
     header("Location: batch_list.php");
     exit();
 }
 
-$conn->close();
+$batch_id = (int)$_GET['batch_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $batch_number = $conn->real_escape_string($_POST['batch_number']);
+    $breed = $conn->real_escape_string($_POST['breed']);
+    $quantity = (int)$_POST['quantity'];
+
+    $conn->query("UPDATE batches SET batch_number = '$batch_number', breed = '$breed', quantity = $quantity, date_updated = NOW() WHERE id = $batch_id");
+
+    header("Location: batch_list.php");
+    exit();
+}
+
+$result = $conn->query("SELECT * FROM batches WHERE id = $batch_id");
+if ($result->num_rows !== 1) {
+    echo "Batch not found.";
+    exit();
+}
+$row = $result->fetch_assoc();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Batch</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #B22222;
-            margin: 0;
-            padding: 40px;
             color: white;
+            margin: 0;
+            padding: 20px;
         }
         .container {
-            background-color: #fff;
+            background-color: white;
             color: black;
-            max-width: 500px;
-            margin: 0 auto;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
         }
-        h2 {
-            text-align: center;
+        h1 {
             color: #c0392b;
-            margin-bottom: 25px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         label {
             font-weight: bold;
-            margin-top: 10px;
         }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
             border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        .btn-submit {
+        .button {
+            padding: 10px;
             background-color: #c0392b;
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 20px;
-            width: 100%;
         }
-        .btn-submit:hover {
-            background-color: #a52a2a;
+        .button:hover {
+            background-color: #a93226;
         }
-        .back-btn {
+        .back-link {
             display: block;
             text-align: center;
-            margin-top: 15px;
-            text-decoration: none;
+            margin-top: 20px;
             color: #c0392b;
-            font-weight: bold;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Edit Batch</h1>
+        <form method="POST">
+            <label for="batch_number">Batch Number</label>
+            <input type="text" name="batch_number" id="batch_number" value="<?= htmlspecialchars($row['batch_number']) ?>" required>
 
-<div class="container">
-    <h2>Edit Rabbit Batch</h2>
-    <form method="POST">
-        <input type="hidden" name="batch_id" value="<?= $batch['id'] ?>">
+            <label for="breed">Breed</label>
+            <input type="text" name="breed" id="breed" value="<?= htmlspecialchars($row['breed']) ?>" required>
 
-        <label for="batch_number">Batch Number:</label>
-        <input type="text" name="batch_number" id="batch_number" value="<?= $batch['batch_number'] ?>" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" name="quantity" id="quantity" value="<?= (int)$row['quantity'] ?>" required>
 
-        <label for="breed">Breed:</label>
-        <input type="text" name="breed" id="breed" value="<?= $batch['breed'] ?>" required>
-
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" id="quantity" value="<?= $batch['quantity'] ?>" required>
-
-        <button type="submit" class="btn-submit">Update Batch</button>
-        <a href="batch_list.php" class="back-btn">← Back to List</a>
-    </form>
-</div>
-
+            <button type="submit" class="button">Update Batch</button>
+        </form>
+        <a href="batch_list.php" class="back-link">← Back to List</a>
+    </div>
 </body>
 </html>

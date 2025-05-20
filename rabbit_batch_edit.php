@@ -1,24 +1,28 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'rbquantity');
+$host = 'localhost';
+$dbname = 'rbquantity';
+$username = 'root';
+$password = '';
 
+$conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$id = $_GET['batch_id'] ?? null;
-
-if (!$id) {
-    echo "Invalid ID";
-    exit;
+if (!isset($_GET['batch_id'])) {
+    die("Batch ID not provided.");
 }
 
+$batch_id = (int)$_GET['batch_id'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $batch = $_POST['batch'];
+    $batch_number = $_POST['batch_number'];
     $breed = $_POST['breed'];
     $quantity = $_POST['quantity'];
+    $date_updated = date('Y-m-d');
 
-    $stmt = $conn->prepare("UPDATE batches SET batch_number = ?, breed = ?, quantity = ? WHERE id = ?");
-    $stmt->bind_param("ssii", $batch, $breed, $quantity, $id);
+    $stmt = $conn->prepare("UPDATE batches SET batch_number = ?, breed = ?, quantity = ?, date_updated = ? WHERE id = ?");
+    $stmt->bind_param("ssisi", $batch_number, $breed, $quantity, $date_updated, $batch_id);
     $stmt->execute();
     $stmt->close();
 
@@ -26,92 +30,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-$result = $conn->query("SELECT * FROM batches WHERE id = $id");
-$data = $result->fetch_assoc();
+$stmt = $conn->prepare("SELECT * FROM batches WHERE id = ?");
+$stmt->bind_param("i", $batch_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$batch = $result->fetch_assoc();
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Edit Rabbit Batch</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #B22222;
-            margin: 0;
-            padding: 40px;
             color: white;
+            padding: 20px;
         }
         .container {
-            background-color: #fff;
+            background-color: white;
             color: black;
-            max-width: 500px;
-            margin: 0 auto;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
         }
         h2 {
             text-align: center;
             color: #c0392b;
-            margin-bottom: 25px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         label {
             font-weight: bold;
-            margin-top: 10px;
         }
         input[type="text"], input[type="number"] {
-            width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
             border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
         }
-        .btn-submit {
+        .button {
+            padding: 10px;
             background-color: #c0392b;
             color: white;
             border: none;
-            padding: 10px 16px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
             width: 100%;
         }
-        .btn-submit:hover {
-            background-color: #a52a2a;
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            text-decoration: none;
-            color: #c0392b;
-            font-weight: bold;
+        .button:hover {
+            background-color: #a93226;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Edit Rabbit Batch</h2>
+        <form method="POST">
+            <label>Batch Number:</label>
+            <input type="text" name="batch_number" value="<?= $batch['batch_number'] ?>" required>
 
-<div class="container">
-    <h2>Edit Rabbit Batch</h2>
-    <form method="POST">
-        <label for="batch">Batch Number:</label>
-        <input type="text" id="batch" name="batch" value="<?= $data['batch_number'] ?>" required>
+            <label>Breed:</label>
+            <input type="text" name="breed" value="<?= $batch['breed'] ?>" required>
 
-        <label for="breed">Breed:</label>
-        <input type="text" id="breed" name="breed" value="<?= $data['breed'] ?>" required>
+            <label>Quantity:</label>
+            <input type="number" name="quantity" value="<?= $batch['quantity'] ?>" required>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" value="<?= $data['quantity'] ?>" required>
-
-        <button type="submit" class="btn-submit">Update</button>
-        <a href="rabbit_batch_list.php" class="back-btn">← Back to List</a>
-    </form>
-</div>
-
+            <button type="submit" class="button">Update Batch</button>
+        </form>
+    </div>
 </body>
 </html>
-
-<?php $conn->close(); ?>

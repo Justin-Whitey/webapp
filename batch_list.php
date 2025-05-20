@@ -10,7 +10,7 @@ if ($conn->connect_error) {
 }
 
 if (isset($_GET['delete_id'])) {
-    $delete_id = $_GET['delete_id'];
+    $delete_id = (int)$_GET['delete_id'];
     $conn->query("DELETE FROM batches WHERE id = $delete_id");
     header("Location: batch_list.php");
     exit();
@@ -71,26 +71,26 @@ $result = $conn->query("SELECT * FROM batches");
             justify-content: center;
             gap: 6px;
         }
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
         .back-button {
-            display: block;
-            width: fit-content;
-            margin: 20px auto 0;
-            padding: 6px 16px;
+            padding: 8px 16px;
             font-size: 14px;
-            background-color: #c0392b;
+            background-color: #808080;
             color: white;
             border-radius: 4px;
             text-decoration: none;
             text-align: center;
         }
         .back-button:hover {
-            background-color: #a93226;
+            background-color: #696969;
         }
         .add-new-button {
-            display: block;
-            width: fit-content;
-            margin: 20px auto;
-            padding: 6px 16px;
+            padding: 8px 16px;
             font-size: 14px;
             background-color: #c0392b;
             color: white;
@@ -106,8 +106,6 @@ $result = $conn->query("SELECT * FROM batches");
 <body>
     <div class="container">
         <h1>All Batch Entries</h1>
-        <!-- Add New Button placed under the heading -->
-        <a href="batch_form.php" class="add-new-button">Add New</a>
         
         <table>
             <tr>
@@ -115,26 +113,32 @@ $result = $conn->query("SELECT * FROM batches");
                 <th>Breed</th>
                 <th>Quantity</th>
                 <th>Date Created</th>
+                <th>Last Updated</th>
                 <th>Actions</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?= $row['batch_number'] ?></td>
-                    <td><?= $row['breed'] ?></td>
-                    <td><?= $row['quantity'] ?></td>
-                    <td><?= date('F j, Y', strtotime($row['date_created'])) ?></td>
+                    <td><?php echo $row['batch_number']; ?></td>
+                    <td><?php echo $row['breed']; ?></td>
+                    <td><?php echo $row['quantity']; ?></td>
+                    <td><?php echo date('F j, Y', strtotime($row['date_created'])); ?></td>
+                    <td><?php echo $row['date_updated'] ? date('F j, Y', strtotime($row['date_updated'])) : '—'; ?></td>
                     <td>
                         <div class="action-group">
-                            <a href="view_expenses.php?batch_id=<?= $row['id'] ?>" class="button">View Expenses</a>
-                            <a href="add_expenses.php?batch_id=<?= $row['id'] ?>" class="button">Add Expenses</a>
-                            <a href="batch_list.php?delete_id=<?= $row['id'] ?>" class="button" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
-                            <a href="batch_edit.php?batch_id=<?= $row['id'] ?>" class="button">Edit</a>
+                            <a href="view_expenses.php?batch_id=<?php echo $row['id']; ?>" class="button">View Expenses</a>
+                            <a href="add_expenses.php?batch_id=<?php echo $row['id']; ?>" class="button">Add Expenses</a>
+                            <a href="batch_list.php?delete_id=<?php echo $row['id']; ?>" class="button" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+                            <a href="batch_edit.php?batch_id=<?php echo $row['id']; ?>" class="button">Edit</a>
                         </div>
                     </td>
                 </tr>
             <?php endwhile; ?>
         </table>
-        <a href="hamsterfrnt.html" class="back-button">Back</a>
+
+        <div class="footer-buttons">
+            <a href="hamsterfrnt.html" class="back-button">Back</a>
+            <a href="batch_form.php" class="add-new-button">Add New</a>
+        </div>
     </div>
 </body>
 </html>

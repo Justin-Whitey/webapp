@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Logout Confirmation</title>
     <style>
         body {
@@ -9,56 +11,78 @@
             background-color: #9B2D2E;
             color: white;
         }
+
         .header {
-            background-color: black;
-            padding: 10px;
+            background-color: #000;
+            padding: 20px 0;
             text-align: center;
         }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: 2px;
+        }
+
         .container {
             text-align: center;
-            padding: 40px;
-            background-color: #9B2D2E;
+            padding: 60px 20px;
         }
+
+        h2 {
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 20px; 
+            gap: 30px;
+            flex-wrap: wrap;
         }
+
         .button {
-            padding: 10px 20px;
-            margin: 10px;
+            padding: 12px 30px;
             border: none;
-            cursor: pointer;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
+
         .yes-button {
             background-color: gray;
             color: white;
         }
+
+        .yes-button:hover {
+            background-color: #5a5a5a;
+        }
+
         .go-back-button {
             background-color: black;
             color: white;
-            text-decoration: none;
         }
+
         .go-back-button:hover {
-            background-color: #555; 
+            background-color: #333;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>PMEX</h1>
+        <h1>PMEX System</h1>
     </div>
 
     <div class="container">
-        <h2>Are you sure you want to Log out?</h2>
+        <h2>Are you sure you want to log out?</h2>
         <div class="button-container">
             <form action="logout.php" method="POST">
-                <button type="submit" class="button yes-button">Yes</button>
+                <button type="submit" class="button yes-button">Yes, Log Out</button>
             </form>
-            <a href="front_page.html" class="button go-back-button">Go Back</a>
+            <a href="front_page.html" class="button go-back-button">Cancel</a>
         </div>
     </div>
 
