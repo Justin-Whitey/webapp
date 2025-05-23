@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2025 at 04:43 PM
+-- Generation Time: May 23, 2025 at 03:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -32,16 +32,17 @@ CREATE TABLE `batches` (
   `batch_number` int(11) NOT NULL,
   `breed` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `date_created` datetime DEFAULT current_timestamp()
+  `date_created` datetime DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `batches`
 --
 
-INSERT INTO `batches` (`id`, `batch_number`, `breed`, `quantity`, `date_created`) VALUES
-(8, 1, 'kol', 12, '2025-05-13 22:03:37'),
-(9, 1, '2', 3434, '2025-05-13 22:08:51');
+INSERT INTO `batches` (`id`, `batch_number`, `breed`, `quantity`, `date_created`, `date_updated`) VALUES
+(8, 1, 'kol', 12, '2025-05-13 22:03:37', NULL),
+(9, 1, '2', 2121212, '2025-05-13 22:08:51', '2025-05-20 00:00:00');
 
 --
 -- Indexes for dumped tables

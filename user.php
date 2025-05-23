@@ -30,10 +30,10 @@ if ($result->num_rows === 1) {
         header("Location: homepage.html");
         exit();
     } else {
-        echo "Incorrect password.";
+        echo "<script>alert('The email or password you entered is incorrect.'); window.location.href = 'log_in.php';</script>";
     }
 } else {
-    echo "User not found.";
+    echo "<script>alert('The email or password you entered is incorrect.'); window.location.href = 'log_in.php';</script>";
 }
 
 $stmt->close();
